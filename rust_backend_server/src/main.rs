@@ -6,7 +6,7 @@ mod models;
 mod routes;
 
 use models::User;
-use routes::{get_user, create_user, search_by_user_name, UserDb};
+use routes::{get_user, create_user, search_by_user_name, create_user_form, UserDb};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -22,6 +22,7 @@ async fn main() -> std::io::Result<()> {
             .service(get_user)
             .service(create_user)
             .service(search_by_user_name)
+            .service(create_user_form)
     })
     .bind(("127.0.0.1", port))?
     .workers(2)

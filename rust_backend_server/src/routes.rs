@@ -75,3 +75,21 @@ pub async fn create_user(
         name,
     })
 }
+
+#[actix_web::post("users_form")]
+pub async fn create_user_form(
+    user_data: web::Form<User>,
+    db:  web::Data<UserDb>
+) -> impl Responder {
+    let mut db = db.lock().unwrap();
+    let name = user_data.name.clone();
+    let new_id = insert_user(
+        &mut db,
+        user_data.into_inner()
+    );
+
+    HttpResponse::Created().json(CreatUserResponse {
+        id: new_id,
+        name,
+    })
+}
