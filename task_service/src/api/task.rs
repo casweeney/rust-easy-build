@@ -110,7 +110,7 @@ async fn state_transition(
     task.result_file = result_file;
 
     let task_identifier = task.get_global_id();
-    match ddb.repo.put_task(task).await {
+    match ddb_repo.put_task(task).await {
         Ok(()) => Ok(Json(TaskIdentifier {task_global_id: task_identifier})),
         Err(_) => Err(TaskError::TaskUpdateFailure)
     }
