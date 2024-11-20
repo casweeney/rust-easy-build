@@ -1,4 +1,5 @@
 mod api;
+mod model;
 mod repository;
 
 use api::task::{
@@ -23,7 +24,7 @@ async fn main() -> std::io::Result<()> {
         );
     
         let ddb_data = Data::new(ddb_repo);
-        
+
         let logger = Logger::default();
         App::new()
         .wrap(logger)
